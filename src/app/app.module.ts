@@ -1,18 +1,33 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+import {ExportMaterialModule} from './material.module';
+import { HttpClientModule } from '@angular/common/http';
+import { StatComponent } from './stat/stat.component';
+import { DataService } from './shared/data.service';
+
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    StatComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FontAwesomeModule,
+    ExportMaterialModule  
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

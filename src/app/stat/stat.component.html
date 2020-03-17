@@ -1,0 +1,47 @@
+
+<span>Stat</span>
+
+
+<div>
+    <div >      
+            <div class="title" >
+                <span style="margin-left: 50px" class="first">{{ item.date }}</span>
+            </div>
+            <!-- <table mat-table style="margin: 10px;">
+                <thead>
+                    <th>Country</th>
+                    <th>Confirmed</th>
+                    <th>Deaths</th>
+                    <th>Recovered</th>
+                </thead>
+                <tbody>
+                   <tr *ngFor="let person of item.cases">
+                       <td>{{person.region}}</td>
+                       <td>{{person.confirmed}}</td>
+                       <td>{{person.deaths}}</td>
+                       <td>{{person.recovered}}</td>
+                   </tr>
+                </tbody>
+            </table> -->
+            <table mat-table [dataSource]="item.cases"  class="mat-elevation-z8">
+                <ng-container matColumnDef="region">
+                    <th mat-header-cell *matHeaderCellDef> Country </th>
+                    <td mat-cell *matCellDef="let user"> {{user.region}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="confirmed">
+                    <th mat-header-cell *matHeaderCellDef> Confirmed </th>
+                    <td mat-cell *matCellDef="let user"> {{user.confirmed}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="recovered">
+                    <th mat-header-cell *matHeaderCellDef> Recovered </th>
+                    <td mat-cell *matCellDef="let user"> {{user.recovered}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="deaths">
+                    <th mat-header-cell *matHeaderCellDef> Deaths </th>
+                    <td mat-cell *matCellDef="let user"> {{user.deaths}} </td>
+                  </ng-container>         
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+             </table>
+        </div>
+</div>

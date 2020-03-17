@@ -1,11 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { StatComponent } from './stat/stat.component';
 
+const routes: Routes = [
+  { 
+  path: 'stat', component: StatComponent },
 
-const routes: Routes = [];
+{ path: '',
+  redirectTo: '/stat',
+  pathMatch: 'full'
+},
+{ path: '**', redirectTo: '/stat' }];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [     RouterModule.forRoot(routes, {
+    initialNavigation: 'enabled'
+})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
