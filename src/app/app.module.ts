@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import {ExportMaterialModule} from './material.module';
+import { ExportMaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { StatComponent } from './stat/stat.component';
 import { DataService } from './shared/data.service';
@@ -25,9 +25,14 @@ import { DataService } from './shared/data.service';
     AppRoutingModule,
     HttpClientModule,
     FontAwesomeModule,
-    ExportMaterialModule  
+    ExportMaterialModule
   ],
-  providers: [DataService],
+  providers: [
+    {
+      provide: 'isBrowser', useValue: true
+    },
+    DataService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
