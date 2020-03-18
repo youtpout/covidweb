@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { ExportMaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { StatComponent } from './stat/stat.component';
 import { DataService } from './shared/data.service';
@@ -24,8 +23,7 @@ import { DataService } from './shared/data.service';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    FontAwesomeModule,
-    ExportMaterialModule
+    FontAwesomeModule
   ],
   providers: [
     {

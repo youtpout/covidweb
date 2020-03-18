@@ -1,8 +1,8 @@
-<nav mat-tab-nav-bar>
-  <a mat-tab-link routerLink="stat" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+<nav style="display: flex;flex-direction: row;width: 100%;justify-content: flex-start;">
+  <a routerLink="stat" style="flex: 1;" color="primary" routerLinkActive #rla="routerLinkActive">
     Stat
   </a>
-  <a mat-tab-link routerLink="map" routerLinkActive #rlb="routerLinkActive" [active]="rlb.isActive">
+  <a routerLink="map" style="flex: 1;" routerLinkActive #rlb="routerLinkActive">
     Map
   </a>
 </nav>
