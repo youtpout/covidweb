@@ -1,5 +1,57 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~leaflet/dist/leaflet.css";
+@import "~bootstrap/dist/css/bootstrap.css";
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+header{
+    display: inline;
+}
+
+footer{
+   display: none;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 100000;
+    font-size:12px; 
+    background-color: #006968;
+    flex-direction: column;
+   justify-content: center;
+   height: 60px;
+    nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+
+    a{
+        color: rgba(255, 255, 255, 0.5);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    a.active{
+        color: white;
+    }
+    a:hover{
+        color: rgba(255, 255, 255, 0.8);
+    }
+    }
+}
+
+.container{
+    margin-bottom: 80px;
+}
+
+@media (max-width: 1000px) {
+    footer{
+        display: flex;
+    }
+    header{
+        display: none;
+    }
+    }

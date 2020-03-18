@@ -6,11 +6,10 @@ import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
 import { HttpClientModule } from '@angular/common/http';
 import { StatComponent } from './stat/stat.component';
 import { DataService } from './shared/data.service';
+import { UiModule } from './ui/ui.module';
 
 
 @NgModule({
@@ -23,7 +22,7 @@ import { DataService } from './shared/data.service';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    FontAwesomeModule
+    UiModule
   ],
   providers: [
     {

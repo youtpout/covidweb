@@ -1,5 +1,4 @@
 import { Component, ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 import { DataService } from './shared/data.service';
 
 @Component({
@@ -20,7 +19,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    
+
   }
 
 }
