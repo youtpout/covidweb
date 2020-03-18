@@ -28,7 +28,7 @@ export class StatComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataService.getCases();
+    //this.dataService.getCases();
   }
 
 }
