@@ -1,11 +1,9 @@
-
-
 <nav mat-tab-nav-bar>
-  <a mat-tab-link
-     routerLink="stat"
-     routerLinkActive #rla="routerLinkActive"
-     [active]="rla.isActive">
+  <a mat-tab-link routerLink="stat" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
     Stat
+  </a>
+  <a mat-tab-link routerLink="map" routerLinkActive #rlb="routerLinkActive" [active]="rlb.isActive">
+    Map
   </a>
 </nav>
 
