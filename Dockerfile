@@ -6,7 +6,7 @@ COPY . /app
 RUN npm run build:ssr
 # RUN npm run generate:prerender
 
-FROM node:12-alpine
+FROM node:8-alpine
 
 WORKDIR /app
 # Copy dependency definitions
