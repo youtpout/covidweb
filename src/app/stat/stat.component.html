@@ -1,26 +1,24 @@
-<span>Stat</span>
-
-
 <div>
-  <div>
-    <div class="title">
-      <span style="margin-left: 50px" class="first">{{ item.date }}</span>
-    </div>
-    <table  class="table table-bordered" style="margin: 10px;">
-      <thead>
-        <th>Country</th>
-        <th>Confirmed</th>
-        <th>Deaths</th>
-        <th>Recovered</th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let person of item.cases">
-          <td>{{person.region}}</td>
-          <td>{{person.confirmed}}</td>
-          <td>{{person.deaths}}</td>
-          <td>{{person.recovered}}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div style="display: flex;flex-direction: column;align-items: center;font-size: 25px;">
+    <span>Date : </span><span style="color: brown;" class="first">{{ item.date | date: 'yyyy-MM-dd' }}</span>
+    <span>Cases : </span><span style="color: orange;" class="first">{{item.confirmed}}</span>
+    <span>Recovered : </span><span style="color: green;" class="first">{{item.recovered}}</span>
+    <span>Deaths : </span> <span style="color: red;" class="first">{{item.deaths}}</span>
   </div>
+  <table class="table table-bordered table-dark" style="margin: 10px;">
+    <thead>
+      <th>Country</th>
+      <th>Case</th>
+      <th>Recovered</th>
+      <th>Deaths</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let person of item.cases">
+        <td>{{person.region}}</td>
+        <td>{{person.confirmed}}</td>
+        <td>{{person.recovered}}</td>
+        <td>{{person.deaths}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

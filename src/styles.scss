@@ -3,7 +3,10 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+    margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+    background-color: rgba(0,105,104,0.1);
+}
 
 header{
     display: inline;
@@ -32,6 +35,7 @@ footer{
         display: flex;
         flex-direction: column;
         align-items: center;
+        text-decoration: none;
     }
 
     a.active{
@@ -39,12 +43,13 @@ footer{
     }
     a:hover{
         color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
     }
     }
 }
 
 .container{
-    margin-bottom: 80px;
+    margin-bottom: 100px;
 }
 
 @media (max-width: 1000px) {
