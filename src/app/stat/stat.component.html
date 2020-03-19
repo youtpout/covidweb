@@ -1,11 +1,15 @@
 <div>
   <div style="display: flex;flex-direction: column;align-items: center;font-size: 25px;">
-    <span>Date : </span><span style="color: brown;" class="first">{{ item.date | date: 'yyyy-MM-dd' }}</span>
-    <span>Cases : </span><span style="color: orange;" class="first">{{item.confirmed}}</span>
-    <span>Recovered : </span><span style="color: green;" class="first">{{item.recovered}}</span>
-    <span>Deaths : </span> <span style="color: red;" class="first">{{item.deaths}}</span>
+    <span style="font-size: 18px;"><span>Date : </span><span style="color: brown;"
+        class="first">{{ item.date | date: 'yyyy-MM-dd' }}</span></span>
+    <span style="font-size: 18px;">Cases : </span><span style="color: orange; font-weight: bold;"
+      class="first">{{cases }}</span>
+    <span style="font-size: 18px;">Recovered : </span><span style="color: green;font-weight: bold;"
+      class="first">{{recovered}}</span>
+    <span style="font-size: 18px;">Deaths : </span> <span style="color: red;font-weight: bold;"
+      class="first">{{deaths}}</span>
   </div>
-  <table class="table table-bordered table-dark" style="margin: 10px;">
+  <table class="table table-bordered table-dark">
     <thead>
       <th>Country</th>
       <th>Case</th>

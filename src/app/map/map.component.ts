@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Inject } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Inject, AfterContentInit } from '@angular/core';
 import { CaseByCity } from '../shared/case-by-city';
 import { DataService } from '../shared/data.service';
 
@@ -13,7 +13,7 @@ const shadowUrl = 'assets/marker-shadow.png';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements AfterViewInit {
+export class MapComponent implements OnInit, AfterContentInit {
   private map;
   items: Array<CaseByCity>;
   public L = null;
@@ -42,20 +42,24 @@ export class MapComponent implements AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     if (this.isBrowser) {
       this.initMap();
     }
   }
 
+  ngAfterContentInit() {
+
+  }
+
+
   private initMap(): void {
     this.map = this.L.map('map', {
-      center: [39.8282, -98.5795],
-      zoom: 3
+      center: [51.505, -0.09],
+      zoom: 5
     });
     const tiles = this.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     });
 
     tiles.addTo(this.map);
@@ -66,23 +70,45 @@ export class MapComponent implements AfterViewInit {
     if (this.map && this.items && this.items.length) {
       console.log("marker");
       let markers = [];
+      let i = 0;
       for (const item of this.items) {
         if (item && item.coord) {
-          //let text = this.toolService.getCountryName(item.country) + ", " + item.city;
-          // if (item.confirmed) {
-          //     text += " " + item.confirmed + " confirmed";
-          // }
+          var poptext = (item.city || item.country) + "<br/>" + item.confirmed + " confirmed";
           let m = {
             lat: item.coord.latitude,
             lng: item.coord.longitude,
-            title: "country",
             selected: false
           };
-          const marker = this.L.marker([m.lat, m.lng]).addTo(this.map);
-
+          setTimeout(() => {
+            this.showMarker(m.lat, m.lng, poptext)
+          }, i);
+          i++;
         }
       }
     }
   }
+
+
+  showMarker(lat, long, text) {
+    const marker = this.L.marker([lat, long]).addTo(this.map).bindTooltip(text);
+  }
+
+
+  // showMarker() {
+  //   console.log("marker");
+  //   let markers = [];
+  //   for (const item of this.items) {
+  //     if (item && item.coord) {
+  //       var poptext = (item.city || item.country) + "<br/>" + item.confirmed + " confirmed";
+  //       let m = {
+  //         lat: item.coord.latitude,
+  //         lng: item.coord.longitude,
+  //         selected: false
+  //       };
+  //       const marker = this.L.marker([m.lat, m.lng]).addTo(this.map).bindTooltip(poptext);
+
+  //     }
+  //   }
+  // }
 
 }
