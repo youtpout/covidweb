@@ -26,41 +26,46 @@ header {
 
 }
 
+
 footer {
-    display: none;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    z-index: 100000;
-    font-size: 12px;
-    background-color: #006968;
-    flex-direction: column;
-    justify-content: center;
-    height: 60px;
-    box-shadow: 0 -5px 5px black !important;
+    height: 0px;
 
-    nav {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        flex-wrap: nowrap;
+    .footer {
+        display: none;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        z-index: 100000;
+        font-size: 12px;
+        background-color: #006968;
+        flex-direction: column;
+        justify-content: center;
+        height: 60px;
+        box-shadow: 0 -5px 5px black !important;
 
-        a {
-            color: rgba(255, 255, 255, 0.5);
+        nav {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-decoration: none;
-        }
+            flex-direction: row;
+            justify-content: space-around;
+            flex-wrap: nowrap;
 
-        a.active {
-            color: white;
-        }
+            a {
+                color: rgba(255, 255, 255, 0.5);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-decoration: none;
+            }
 
-        a:hover {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
+            a.active {
+                color: white;
+            }
+
+            a:hover {
+                color: rgba(255, 255, 255, 0.8);
+                text-decoration: none;
+            }
         }
     }
 }
@@ -81,15 +86,16 @@ footer {
 
 
 @media (max-width: 1000px) {
+
     footer {
-        display: flex;
+        height: 60px;
+
+        .footer {
+            display: flex;
+        }
     }
 
     header {
         display: none;
-    }
-
-    .content {
-        margin-bottom: 150px;
     }
 }

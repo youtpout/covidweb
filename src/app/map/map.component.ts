@@ -70,7 +70,7 @@ export class MapComponent implements OnInit, AfterContentInit {
     if (this.map && this.items && this.items.length) {
       setTimeout(() => {
         this.showMarker2();
-      }, 100);
+      }, 200);
     }
   }
 
