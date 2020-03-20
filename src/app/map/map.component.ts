@@ -68,23 +68,9 @@ export class MapComponent implements OnInit, AfterContentInit {
 
   loadMarker() {
     if (this.map && this.items && this.items.length) {
-      console.log("marker");
-      let markers = [];
-      let i = 0;
-      for (const item of this.items) {
-        if (item && item.coord) {
-          var poptext = (item.city || item.country) + "<br/>" + item.confirmed + " confirmed";
-          let m = {
-            lat: item.coord.latitude,
-            lng: item.coord.longitude,
-            selected: false
-          };
-          setTimeout(() => {
-            this.showMarker(m.lat, m.lng, poptext)
-          }, i);
-          i++;
-        }
-      }
+      setTimeout(() => {
+        this.showMarker2();
+      }, 100);
     }
   }
 
@@ -94,21 +80,21 @@ export class MapComponent implements OnInit, AfterContentInit {
   }
 
 
-  // showMarker() {
-  //   console.log("marker");
-  //   let markers = [];
-  //   for (const item of this.items) {
-  //     if (item && item.coord) {
-  //       var poptext = (item.city || item.country) + "<br/>" + item.confirmed + " confirmed";
-  //       let m = {
-  //         lat: item.coord.latitude,
-  //         lng: item.coord.longitude,
-  //         selected: false
-  //       };
-  //       const marker = this.L.marker([m.lat, m.lng]).addTo(this.map).bindTooltip(poptext);
+  showMarker2() {
+    console.log("marker");
+    let markers = [];
+    for (const item of this.items) {
+      if (item && item.coord) {
+        var poptext = (item.city || item.country) + "<br/>" + item.confirmed + " confirmed";
+        let m = {
+          lat: item.coord.latitude,
+          lng: item.coord.longitude,
+          selected: false
+        };
+        const marker = this.L.marker([m.lat, m.lng]).addTo(this.map).bindTooltip(poptext);
 
-  //     }
-  //   }
-  // }
+      }
+    }
+  }
 
 }
