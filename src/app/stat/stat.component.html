@@ -9,20 +9,29 @@
     <span style="font-size: 18px;">Deaths : </span> <span style="color: red;font-weight: bold;" class="first">{{deaths}}
       <span *ngIf="deathsAdd">(+{{deathsAdd}})</span></span>
   </div>
-  <table class="table table-bordered table-dark">
-    <thead>
-      <th>Country</th>
-      <th>Case</th>
-      <th>Recovered</th>
-      <th>Deaths</th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let person of item.series">
-        <td>{{person.country}}<span *ngIf="person.province"> {{person.province}}</span></td>
-        <td>{{person.confirmed}}<span *ngIf="person.confirmedAdd"> (+{{person.confirmedAdd}})</span></td>
-        <td>{{person.recovered}}<span *ngIf="person.recoveredAdd"> (+{{person.recoveredAdd}})</span></td>
-        <td>{{person.deaths}}<span *ngIf="person.deathsAdd"> (+{{person.deathsAdd}})</span></td>
-      </tr>
-    </tbody>
-  </table>
+  <div *ngIf="item && item.series" style="margin:10px 0px;display: flex;flex-direction: row; flex-wrap: wrap;">
+    <input style="max-width: 300px;" type="text" class="form-control" [(ngModel)]="country"
+      (ngModelChange)="search($event)" placeholder="Search country ...">
+    <button style="margin-left:20px" type="button" (click)="clear()" class="btn btn-primary">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="sticky-table">
+    <table class="table-covid">
+      <thead style="cursor: pointer;">
+        <th (click)="filter('country')">Country<span><i class="fas fa-arrows-alt-v"></i></span></th>
+        <th (click)="filter('confirmed')">Case<span><i class="fas fa-arrows-alt-v"></i></span></th>
+        <th (click)="filter('recovered')">Recovered<span><i class="fas fa-arrows-alt-v"></i></span></th>
+        <th (click)="filter('deaths')">Deaths<span><i class="fas fa-arrows-alt-v"></i></span></th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let person of datas">
+          <td>{{person.country}}<span *ngIf="person.province"> {{person.province}}</span></td>
+          <td>{{person.confirmed}}<span *ngIf="person.confirmedAdd"> (+{{person.confirmedAdd}})</span></td>
+          <td>{{person.recovered}}<span *ngIf="person.recoveredAdd"> (+{{person.recoveredAdd}})</span></td>
+          <td>{{person.deaths}}<span *ngIf="person.deathsAdd"> (+{{person.deathsAdd}})</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

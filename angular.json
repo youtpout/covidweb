@@ -25,6 +25,7 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
+              "src/sitemap.xml",
               "src/assets",
               {
                 "glob": "**/*",
@@ -97,6 +98,7 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
+              "src/sitemap.xml",
               "src/assets",
               {
                 "glob": "**/*",

@@ -55,7 +55,6 @@ export class DataService {
         //this.toolService.logEvent("get", "cities");
         return this.http.get(url).subscribe((r: any) => {
             time = Date.now() - time;
-            console.log('Load cities in ' + time + 'ms');
             let item = this.jsonToCity(r);
             this.changeCitiesMessage(item);
 
@@ -74,7 +73,6 @@ export class DataService {
         //this.toolService.logEvent("get", "cases");
         return this.http.get(url).subscribe((r: any) => {
             time = Date.now() - time;
-            console.log('Load case by country in ' + time + 'ms');
 
             let caseByDate = new CaseByDate();
             if (r) {

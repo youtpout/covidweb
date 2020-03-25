@@ -1,76 +1,80 @@
-<h3>Around</h3>
+<div>
+    <h3>Around</h3>
 
-<div class="row">
-    <div style="display:none">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group" style="margin-left:11px;">
-            <label asp-for="Latitude" class="control-label"></label>
-            <input id="latitude" asp-for="Latitude" onchange="updateMarker()" class="form-control" />
-            <span asp-validation-for="Latitude" class="text-danger"></span>
+    <div class="">
+        <div style="display:none">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Latitude" class="control-label"></label>
+                <input id="latitude" asp-for="Latitude" onchange="updateMarker()" class="form-control" />
+                <span asp-validation-for="Latitude" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Longitude" class="control-label"></label>
+                <input id="longitude" asp-for="Longitude" onchange="updateMarker()" class="form-control" />
+                <span asp-validation-for="Longitude" class="text-danger"></span>
+            </div>
         </div>
-        <div class="form-group" style="margin-left:11px;">
-            <label asp-for="Longitude" class="control-label"></label>
-            <input id="longitude" asp-for="Longitude" onchange="updateMarker()" class="form-control" />
-            <span asp-validation-for="Longitude" class="text-danger"></span>
+        <div>
+            <div id="mapid" class="map-around">
+            </div>
+            <span style="margin-top:10px;" class="text-white">You can move the marker.</span>
         </div>
     </div>
-    <div style="margin-left:11px;">
-        <div id="mapid" class="map-around">
-        </div>
-        <span style="margin-top:10px;" class="text-white">You can move the marker.</span>
-    </div>
-</div>
 
-<div class="row" style="margin-top:10px;">
-    <button style="margin-left:10px" type="button" (click)="getLocation()" class="btn btn-primary">
-        <i class="fas fa-location-arrow"></i>
-    </button>
-    <input style="margin-left:20px" type="button" value="Get Case Around" (click)="getCaseAround()"
-        class="btn btn-primary" />
-    <button style="margin-left:20px" type="button" (click)="clearMarkers()" class="btn btn-primary">
-        <i class="fas fa-times"></i>
-    </button>
-</div>
-<div style="margin-top:10px;">
-    <p class="text-white">Please note that our system does not include all of the cities that have confirmed cases,
-        cases
-        may be grouped by country and not by city.</p>
-    <p *ngIf="!havePosition" class="text-danger">{{error}}</p>
-    <div style="text-align: center;" *ngIf="isSearching">
-        <i class="fas fa-spinner fa-pulse fa-5x"></i>
+    <div style="margin-top:10px;">
+        <button type="button" (click)="getLocation()" class="btn btn-primary">
+            <i class="fas fa-location-arrow"></i>
+        </button>
+        <input style="margin-left:20px" type="button" value="Get Case Around" (click)="getCaseAround()"
+            class="btn btn-primary" />
+        <button style="margin-left:20px" type="button" (click)="clearMarkers()" class="btn btn-primary">
+            <i class="fas fa-times"></i>
+        </button>
     </div>
-    <table *ngIf="items" class="table table-bordered table-dark">
-        <thead>
-            <tr>
-                <th>
-                    Country
-                </th>
-                <th>
-                    City
-                </th>
-                <th>
-                    Distance
-                </th>
-                <th>
-                    Cases
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let item of items">
-                <td>
-                    {{item.country }}
-                </td>
-                <td>
-                    {{item.city}}
-                </td>
-                <td>
-                    {{item.distance| number:'1.0-2'}} km
-                </td>
-                <td>
-                    {{item.confirmed}}
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div style="margin-top:10px;">
+        <p class="text-white">Please note that our system does not include all of the cities that have confirmed cases,
+            cases
+            may be grouped by country and not by city.</p>
+        <p *ngIf="!havePosition" class="text-danger">{{error}}</p>
+        <div style="text-align: center;" *ngIf="isSearching">
+            <i class="fas fa-spinner fa-pulse fa-5x"></i>
+        </div>
+        <div class="sticky-table">
+            <table *ngIf="items" class="table-covid">
+                <thead>
+                    <tr>
+                        <th>
+                            Country
+                        </th>
+                        <th>
+                            City
+                        </th>
+                        <th>
+                            Distance
+                        </th>
+                        <th>
+                            Cases
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of items">
+                        <td>
+                            {{item.country }}
+                        </td>
+                        <td>
+                            {{item.city}}
+                        </td>
+                        <td>
+                            {{item.distance| number:'1.0-2'}} km
+                        </td>
+                        <td>
+                            {{item.confirmed}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

@@ -3,6 +3,7 @@ import { DataService } from '../service/data.service';
 import { Case } from '../models/case';
 import { CaseByDate } from '../models/case-by-date';
 import { DailyTransport } from '../models/daily-transport';
+import { Daily } from '../models/daily';
 
 @Component({
   selector: 'app-stat',
@@ -11,6 +12,7 @@ import { DailyTransport } from '../models/daily-transport';
 })
 export class StatComponent implements OnInit {
   item: DailyTransport;
+  datas: Array<Daily>;
   visibility: [Date, boolean];
   cases: number = 0;
   recovered: number = 0;
@@ -20,13 +22,14 @@ export class StatComponent implements OnInit {
   deathsAdd: number = 0;
   displayedColumns = ["region", "confirmed", "recovered", "deaths"];
   timeCase;
+  country: string;
   key = "updateNumber";
 
   constructor(private dataService: DataService) {
 
     this.dataService.currentMessage.subscribe(r => {
-      console.log(r);
       this.item = r;
+      this.datas = this.item.series;
       let load = sessionStorage.getItem(this.key);
       if (!load) {
         this.timeCase = setInterval(() => {
@@ -80,6 +83,46 @@ export class StatComponent implements OnInit {
 
   updateCase(goal: number) {
 
+  }
+
+  search(event) {
+    this.datas = [];
+    let text = event.toLocaleLowerCase();
+    let cases = this.item.series;
+    cases = cases.filter(c => c.country.toLocaleLowerCase().indexOf(text) != -1);
+    cases.forEach(element => {
+      this.datas.push(element);
+    });
+  }
+
+  sortOrder = new Map();
+  filter(val: string) {
+    let invert = false;
+    if (this.sortOrder.has(val) && this.sortOrder.get(val) == true) {
+      invert = true;
+      this.sortOrder.set(val, false);
+    } else {
+      this.sortOrder.clear();
+      this.sortOrder.set(val, true);
+    }
+    this.datas = this.datas.sort((a, b) => {
+
+      let res = a[val] < b[val] ? -1 : a[val] > b[val] ? 1 : 0;
+      if (invert)
+        res = res * -1;
+      return res;
+    })
+  }
+
+  clear() {
+    this.country = "";
+    let cases = this.item.series;
+    cases.forEach(element => {
+      this.datas.push(element);
+    });
+    this.sortOrder.clear();
+    this.sortOrder.set('confirmed', true);
+    this.filter('confirmed');
   }
 
 }

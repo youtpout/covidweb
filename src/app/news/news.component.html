@@ -1,5 +1,5 @@
 <h3>Last News</h3>
-<div class="row" *ngIf="item && item.totalNews">
+<div *ngIf="item && item.totalNews">
     <div class="col-lg-12" *ngFor="let newB of item.newsByDate">
         <h5 style="color:forestgreen">{{ newB.date | date: 'yyyy-MM-dd'}} :</h5>
         <ul>

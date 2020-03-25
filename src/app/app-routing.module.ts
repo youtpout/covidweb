@@ -8,18 +8,18 @@ import { AroundComponent } from './around/around.component';
 import { InfosComponent } from './infos/infos.component';
 
 const routes: Routes = [
-  { path: 'stat', component: StatComponent },
+  { path: '', component: StatComponent, pathMatch: 'full' },
   { path: 'map', component: MapComponent },
   { path: 'news', component: NewsComponent },
   { path: 'chart', component: ChartComponent },
   { path: 'around', component: AroundComponent },
   { path: 'infos', component: InfosComponent },
-  {
-    path: '',
-    redirectTo: '/stat',
-    pathMatch: 'full'
-  },
-  { path: '**', redirectTo: '/stat' }];
+  // {
+  //   path: '',
+  //   redirectTo: '/stat',
+  //   pathMatch: 'full'
+  // },
+  { path: '**', redirectTo: '' }];
 
 @NgModule({
   imports: [
