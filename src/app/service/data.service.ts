@@ -16,8 +16,8 @@ import { DailyTransport } from '../models/daily-transport';
 export class DataService {
 
     apiKeyV1 = "41b660dc-2534-4be5-bd65-8aa32157b034";
-    //urlWeb = "https://covid.ovh/";
-    urlWeb = "https://localhost:32768/";
+    urlWeb = "https://api.covid.ovh/";
+    //urlWeb = "https://localhost:32768/";
 
     constructor(private http: HttpClient, private toolService: ToolService) {
 
