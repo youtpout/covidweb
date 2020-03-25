@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef, OnDestroy, OnInit } from '@angular/core';
-import { DataService } from './shared/data.service';
+import { DataService } from './service/data.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.dataService.getCases();
+    this.dataService.getDaily();
     this.dataService.getCities();
   }
 

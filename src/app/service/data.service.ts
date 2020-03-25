@@ -1,21 +1,25 @@
 import { Injectable } from "@angular/core";
 
-import { CaseByDate } from "./case-by-date";
-import { Case } from "./case";
-import { CloseCase } from "./close-case";
+import { CaseByDate } from "../models/case-by-date";
+import { Case } from "../models/case";
+import { CloseCase } from "../models/close-case";
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
-import { CaseByCity } from './case-by-city';
-import { Coord } from './coord';
-
-
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { CaseByCity } from '../models/case-by-city';
+import { Coord } from '../models/coord';
+import { NewsTransportDto } from '../models/news-transport-dto';
+import { map } from "rxjs/operators";
+import { ToolService } from './tool.service';
+import { DailyTransport } from '../models/daily-transport';
 
 @Injectable()
 export class DataService {
 
     apiKeyV1 = "41b660dc-2534-4be5-bd65-8aa32157b034";
+    //urlWeb = "https://covid.ovh/";
+    urlWeb = "https://localhost:32768/";
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private toolService: ToolService) {
 
     }
 
@@ -39,24 +43,13 @@ export class DataService {
     }
 
 
-    getCloseCase(latitude, longitude): Array<CloseCase> {
-        const url = "https://covid.ovh/api/v1.0/case/coord?latitude=" + latitude + "&longitude=" + longitude;
-        let items = new Array<CloseCase>();
-        console.log(Date.now());
-        this.http.get(url).subscribe((r: any) => {
-            if (r && r.length) {
-                items = r;
-            }
-            console.log(Date.now());
-        }, (e) => {
-            console.log(e);
-        });
-
-        return items;
+    public getCloseCase(latitude, longitude): Observable<Array<CaseByCity>> {
+        const url = this.urlWeb + "api/v1.0/case/coord?latitude=" + latitude + "&longitude=" + longitude + "&apiKey=" + this.apiKeyV1;
+        return this.http.get<Array<CloseCase>>(url).pipe(map(r => this.jsonToCity(r)));
     }
 
     getCities(): any {
-        const url = "https://covid.ovh/api/v1.0/case/cities?apiKey=" + this.apiKeyV1;
+        const url = this.urlWeb + "api/v1.0/case/cities?apiKey=" + this.apiKeyV1;
         // console.log(url);
         let time = Date.now();
         //this.toolService.logEvent("get", "cities");
@@ -75,7 +68,7 @@ export class DataService {
     }
 
     getCases(): any {
-        const url = "https://covid.ovh/api/v1.0/case?apiKey=" + this.apiKeyV1;
+        const url = this.urlWeb + "api/v1.0/case?apiKey=" + this.apiKeyV1;
         let time = Date.now();
         // console.log(url);
         //this.toolService.logEvent("get", "cases");
@@ -114,13 +107,31 @@ export class DataService {
         });
     }
 
+    getNews(take: number, skip: number): Observable<NewsTransportDto> {
+        const url = this.urlWeb + "api/v1.0/case/news?apiKey=" + this.apiKeyV1 + "&take=" + take + "&skip=" + skip;
+        // console.log(url);
+        let time = Date.now();
+        return this.http.get<NewsTransportDto>(url);
+    }
+
+    getDaily(): any {
+        const url = this.urlWeb + "api/v1.0/case/daily?apiKey=" + this.apiKeyV1;
+        return this.http.get<DailyTransport>(url).subscribe((r: any) => {
+            this.changeMessage(r);
+        }, (e) => {
+            console.log(e);
+            return e;
+        });
+    }
+
+
     jsonToCity(z: any): Array<CaseByCity> {
         let cities = []
 
         if (z && z.length) {
             for (const r of z) {
                 let city = new CaseByCity();
-                city.country = r.A;
+                city.country = this.toolService.getCountryName(r.A);
                 city.city = r.B;
                 city.coord = new Coord();
                 if (r.C) {

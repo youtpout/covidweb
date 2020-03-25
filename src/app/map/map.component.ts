@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, Inject, AfterContentInit } from '@angular/core';
-import { CaseByCity } from '../shared/case-by-city';
-import { DataService } from '../shared/data.service';
+import { CaseByCity } from '../models/case-by-city';
+import { DataService } from '../service/data.service';
+import { ToolService } from '../service/tool.service';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -18,7 +19,7 @@ export class MapComponent implements OnInit, AfterContentInit {
   items: Array<CaseByCity>;
   public L = null;
 
-  constructor(@Inject('isBrowser') private isBrowser: boolean, private dataService: DataService) {
+  constructor(@Inject('isBrowser') private isBrowser: boolean, private dataService: DataService, private toolService: ToolService, ) {
     if (this.isBrowser) {
       this.L = require('leaflet');
       let iconDefault = this.L.icon({
@@ -85,7 +86,7 @@ export class MapComponent implements OnInit, AfterContentInit {
     let markers = [];
     for (const item of this.items) {
       if (item && item.coord) {
-        var poptext = (item.city || item.country) + "<br/>" + item.confirmed + " confirmed";
+        var poptext = this.toolService.getCountryName(item.country) + (item.city ? ", " + item.city : "") + "<br/>" + item.confirmed + " confirmed";
         let m = {
           lat: item.coord.latitude,
           lng: item.coord.longitude,

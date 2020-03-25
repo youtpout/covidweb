@@ -8,14 +8,25 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { StatComponent } from './stat/stat.component';
-import { DataService } from './shared/data.service';
+import { DataService } from './service/data.service';
 import { UiModule } from './ui/ui.module';
+import { ToolService } from './service/tool.service';
+import { NewsComponent } from './news/news.component';
+import { MapComponent } from './map/map.component';
+import { AroundComponent } from './around/around.component';
+import { ChartComponent } from './chart/chart.component';
+import { InfosComponent } from './infos/infos.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    StatComponent
+    StatComponent,
+    NewsComponent,
+    MapComponent,
+    AroundComponent,
+    ChartComponent,
+    InfosComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -28,7 +39,8 @@ import { UiModule } from './ui/ui.module';
     {
       provide: 'isBrowser', useValue: true
     },
-    DataService
+    DataService,
+    ToolService
   ],
   bootstrap: [AppComponent]
 })

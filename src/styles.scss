@@ -84,6 +84,17 @@ footer {
     // }
 }
 
+.your-position {
+    border-width: 2px;
+    border-style: solid;
+    border-color: blue;
+    height: 25px;
+    width: 25px;
+    background-color: rgba(0, 0, 255, 0.3);
+    border-radius: 50%;
+    display: inline-block;
+}
+
 
 @media (max-width: 1000px) {
 

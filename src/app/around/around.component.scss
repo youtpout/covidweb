@@ -1,0 +1,10 @@
+.map-around {
+    height: 300px;
+    width: 355px;
+}
+
+@media screen and (max-height: 800px) {
+    .map-around {
+        height: 250px;
+    }
+}

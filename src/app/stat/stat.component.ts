@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../shared/data.service';
-import { Case } from '../shared/case';
-import { CaseByDate } from '../shared/case-by-date';
+import { DataService } from '../service/data.service';
+import { Case } from '../models/case';
+import { CaseByDate } from '../models/case-by-date';
+import { DailyTransport } from '../models/daily-transport';
 
 @Component({
   selector: 'app-stat',
@@ -9,12 +10,14 @@ import { CaseByDate } from '../shared/case-by-date';
   styleUrls: ['./stat.component.scss']
 })
 export class StatComponent implements OnInit {
-  item: any;
-  dataItems: Array<Case> = [];
+  item: DailyTransport;
   visibility: [Date, boolean];
   cases: number = 0;
   recovered: number = 0;
   deaths: number = 0;
+  casesAdd: number = 0;
+  recoveredAdd: number = 0;
+  deathsAdd: number = 0;
   displayedColumns = ["region", "confirmed", "recovered", "deaths"];
   timeCase;
   key = "updateNumber";
@@ -22,6 +25,7 @@ export class StatComponent implements OnInit {
   constructor(private dataService: DataService) {
 
     this.dataService.currentMessage.subscribe(r => {
+      console.log(r);
       this.item = r;
       let load = sessionStorage.getItem(this.key);
       if (!load) {
@@ -33,14 +37,9 @@ export class StatComponent implements OnInit {
         this.cases = this.item.confirmed;
         this.recovered = this.item.recovered;
         this.deaths = this.item.deaths;
-      }
-
-      if (this.item && this.item.cases && this.item.cases.length) {
-        this.dataItems = new Array<Case>();
-
-        this.item.cases.forEach(element => {
-          this.dataItems.push(element);
-        });
+        this.casesAdd = this.item.confirmedAdd;
+        this.deathsAdd = this.item.deathsAdd;
+        this.recoveredAdd = this.item.recoveredAdd;
       }
     });
   }
@@ -52,7 +51,7 @@ export class StatComponent implements OnInit {
 
   }
 
-  updateNumber(item: CaseByDate) {
+  updateNumber(item: DailyTransport) {
     if (this.cases < item.confirmed) {
       this.cases += Math.round(item.confirmed / 100);
     } else if (this.cases > item.confirmed) {
@@ -63,6 +62,7 @@ export class StatComponent implements OnInit {
     } else if (this.recovered > item.recovered) {
       this.recovered = item.recovered;
     }
+
     if (this.deaths < item.deaths) {
       this.deaths += Math.round(item.deaths / 100);
     } else if (this.deaths > item.deaths) {
@@ -70,6 +70,9 @@ export class StatComponent implements OnInit {
     }
 
     if (this.cases == item.confirmed && this.recovered == item.recovered && this.deaths == item.deaths) {
+      this.casesAdd = item.confirmedAdd;
+      this.deathsAdd = item.deathsAdd;
+      this.recoveredAdd = item.recoveredAdd;
       clearInterval(this.timeCase);
       sessionStorage.setItem(this.key, 'true');
     }
