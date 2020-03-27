@@ -24,12 +24,14 @@ export class StatComponent implements OnInit {
   timeCase;
   country: string;
   key = "updateNumber";
+  sortOrder = new Map();
 
   constructor(private dataService: DataService) {
 
     this.dataService.currentMessage.subscribe(r => {
       this.item = r;
       this.datas = this.item.series;
+      this.sortOrder.set("confirmed", false);
       let load = sessionStorage.getItem(this.key);
       if (!load) {
         this.timeCase = setInterval(() => {
@@ -52,6 +54,10 @@ export class StatComponent implements OnInit {
       this.updateNumber(this.item);
     }
 
+  }
+
+  getSorted(name) {
+    return this.sortOrder.has(name) ? (this.sortOrder.get(name) == true ? "sorted-up" : "sorted-down") : "not-sorted";
   }
 
   updateNumber(item: DailyTransport) {
@@ -95,7 +101,7 @@ export class StatComponent implements OnInit {
     });
   }
 
-  sortOrder = new Map();
+
   filter(val: string) {
     let invert = false;
     if (this.sortOrder.has(val) && this.sortOrder.get(val) == true) {

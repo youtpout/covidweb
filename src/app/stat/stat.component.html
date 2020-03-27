@@ -19,10 +19,38 @@
   <div class="sticky-table">
     <table class="table-covid">
       <thead style="cursor: pointer;">
-        <th (click)="filter('country')">Country<span><i class="fas fa-arrows-alt-v"></i></span></th>
-        <th (click)="filter('confirmed')">Case<span><i class="fas fa-arrows-alt-v"></i></span></th>
-        <th (click)="filter('recovered')">Recovered<span><i class="fas fa-arrows-alt-v"></i></span></th>
-        <th (click)="filter('deaths')">Deaths<span><i class="fas fa-arrows-alt-v"></i></span></th>
+        <th (click)="filter('country')">
+          <span class="flex-container">
+            <span>Country</span>
+            <span class="sort" [ngClass]="getSorted('country')">
+              <i class="fas fa-angle-up"></i>
+              <i class="fas fa-angle-down"></i></span>
+          </span>
+        </th>
+        <th (click)="filter('confirmed')">
+          <span class="flex-container">
+            <span>Case</span>
+            <span class="sort" [ngClass]="getSorted('confirmed')">
+              <i class="fas fa-angle-up"></i>
+              <i class="fas fa-angle-down"></i>
+            </span> </span>
+        </th>
+        <th (click)="filter('recovered')">
+          <span class="flex-container">
+            <span>Recovered</span>
+            <span class="sort" [ngClass]="getSorted('recovered')">
+              <i class="fas fa-angle-up"></i>
+              <i class="fas fa-angle-down"></i>
+            </span> </span>
+        </th>
+        <th (click)="filter('deaths')">
+          <span class="flex-container">
+            <span>Deaths</span>
+            <span class="sort" [ngClass]="getSorted('deaths')">
+              <i class="fas fa-angle-up"></i>
+              <i class="fas fa-angle-down"></i>
+            </span> </span>
+        </th>
       </thead>
       <tbody>
         <tr *ngFor="let person of datas">

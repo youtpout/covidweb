@@ -126,9 +126,27 @@ a {
         background-color: #242a30;
         border: 1px solid #006968;
         border-left: none;
-      
-        span{
-            float: right;
+
+        .flex-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            align-content: center;
+
+            .sort {
+                display: flex;
+                flex-direction: column;
+                color: rgba(255, 255, 255, 0.5);
+            }
+
+            .sorted-up svg:first-child {
+                color: white;
+            }
+
+            .sorted-down svg:last-child {
+                color: white;
+            }
         }
     }
 
