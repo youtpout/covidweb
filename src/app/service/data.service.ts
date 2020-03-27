@@ -122,6 +122,12 @@ export class DataService {
         });
     }
 
+    getSeries(): Observable<any> {
+        const url = this.urlWeb + "api/v1.0/case/serie?apiKey=" + this.apiKeyV1;
+        return this.http.get<any>(url);
+    }
+
+
 
     jsonToCity(z: any): Array<CaseByCity> {
         let cities = []
