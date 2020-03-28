@@ -17,6 +17,7 @@ import { MapComponent } from './map/map.component';
 import { AroundComponent } from './around/around.component';
 import { ChartComponent } from './chart/chart.component';
 import { InfosComponent } from './infos/infos.component';
+import { KmComponent } from './km/km.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { InfosComponent } from './infos/infos.component';
     MapComponent,
     AroundComponent,
     ChartComponent,
-    InfosComponent
+    InfosComponent,
+    KmComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

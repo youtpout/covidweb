@@ -6,6 +6,7 @@ import { NewsComponent } from './news/news.component';
 import { ChartComponent } from './chart/chart.component';
 import { AroundComponent } from './around/around.component';
 import { InfosComponent } from './infos/infos.component';
+import { KmComponent } from './km/km.component';
 
 const routes: Routes = [
   { path: '', component: StatComponent, pathMatch: 'full' },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'chart', component: ChartComponent },
   { path: 'around', component: AroundComponent },
   { path: 'infos', component: InfosComponent },
+  { path: '1km', component: KmComponent },
   // {
   //   path: '',
   //   redirectTo: '/stat',
